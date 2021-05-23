@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>GambitLabs Challenge</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/sp.css"/>
+	<style>
+		button, table {
+			margin-bottom: 20px;
+		}
+		button {
+			padding: 7px;
+			float: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Heyo!</h1>
+	<p>This is a web page that fetches, processes and displays some modbus data. Created by <a href="https://laurikarjalainen.com" target="_blank">Lauri Karjalainen</a> for <a href="https://github.com/gambit-labs/challenge" target="_blank">Gambit Challenge</a>.</p>
+	<p>Data last updated client-side:<br/><strong id="clientfeedlastupdated"></strong></p>
+	<p>Data last updated server-side:<br/><strong id="serverfeedlastupdated"></strong></p>
+	<button onclick="refresh()"><strong>Click here to refresh</strong></button>
+	<table></table>
+	<script src="clientsidejs.js"></script>
+</body>
+</html>
