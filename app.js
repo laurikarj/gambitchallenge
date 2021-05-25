@@ -5,7 +5,7 @@ const fs = require("fs");
 //this one is a static file server library
 const nstatic = require('node-static');
 
-//create static file server thingy serving stuff from /public, caching disabled for testing purposes
+//create static file server serving stuff from /public, caching disabled for testing purposes
 var file = new(nstatic.Server)("./public", {cache: 0});
 
 //runs on localhost port 3000
@@ -45,24 +45,23 @@ setInterval(()=>{
 	updateSensorData(liveTextFeedUrl);
 }, updateInterval);
 
-//creates a server or something idk node is confusing
+//creates a server
 const server = http.createServer((req, res) => {
 	
 	//200 means ok
 	res.statusCode = 200;
 
 	//serve the feed as json if it is requested
-	//otherwise serve stuff from /public
 	if(req.url == "/feed"){
 		res.setHeader("Content-Type", "application/json");
 		res.end(JSON.stringify({"feed": sensorData}));
-		
+	//otherwise serve stuff from /public
 	}else{
 		file.serve(req, res);
 	}
 });
 
-//starts the server
+//start the server
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });

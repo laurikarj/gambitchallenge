@@ -13,7 +13,7 @@ async function fetchData(){
 	//we'll hold the feed in feed
 	let feed;
 	//fetch the text feed from our local copy
-	await fetch("./feed")
+	await fetch("/feed")
 		.then(response => response.json())
 		.then(data => {feed = data.feed});
 	//split to arr by lines
@@ -50,7 +50,7 @@ function getFloat(reg){
 	let view = new DataView(buffer);
 	view.setUint16(0, modbusValues[reg], true);
 	view.setUint16(2, modbusValues[reg+1], true);
-	//read the buffer as float
+	//read the buffer as float and round to 5 digits
 	return view.getFloat32(0, true).toPrecision(5);
 }
 
@@ -71,7 +71,6 @@ function getInt16(reg){
 //displays stuff in a table and refreshes the "last updated" -info on page
 function displayData(){
 	//define stuff to be displayed in table
-	//this is a relatively messy way to do this
 	let tableContents = [
 		["Flow rate", getFloat(1) + " m³/h"],
 		["Energy Flow Rate", getFloat(3) + " GJ/h"],
@@ -126,6 +125,7 @@ function displayData(){
 		table.appendChild(row);
 	});
 	
+	//display new dates
 	lastServerUpdateSpan.innerHTML = serverLastUpdate;
 	lastClientUpdateSpan.innerHTML = clientLastUpdate;
 }
